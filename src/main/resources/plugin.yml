@@ -1,0 +1,7 @@
+name: 'ElementalMenus'
+version: '${project.version}'
+main: 'me.lokka30.elementalmenus.ElementalMenus'
+description: '${project.description}'
+api-version: '1.13'
+load: POSTWORLD
+softdepend: ['Vault']

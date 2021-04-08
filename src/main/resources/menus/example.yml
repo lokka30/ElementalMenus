@@ -1,0 +1,220 @@
+menu:
+  enabled: false
+  id: 'example'
+  title: '&3&nExample Menu'
+  rows: 3
+  auto-refresh: 3
+
+  open-with:
+    commands:
+      - 'example'
+      - 'another example'
+      - 'one two three'
+      - 'a * c'
+      - 'ab cd * gh * kl mn op'
+
+    items:
+      1:
+        material: 'BOOK'
+        interaction:
+          left-click: false
+          middle-click: false
+          right-click: true
+      2:
+        material: 'CLOCK'
+        meta:
+          display-name: 'Menu Clock!'
+          lore-contains:
+            - 'The clock item must have this line in its lore'
+            - 'And also this line. Doesn''t have to be in order.'
+        interaction:
+          left-click: false
+          middle-click: true
+          right-click: false
+
+  actions-on-open:
+    sound:
+      name: 'BLOCK_CHEST_OPEN'
+      volume: 1.0
+      pitch: 1.5
+      only-for-player: true # false = play to world, true = play to player
+
+  actions-on-close:
+    sound:
+      name: 'BLOCK_CHEST_CLOSE'
+      pitch: 1.5
+
+filler-icon:
+  name: ' '
+  material: 'GRAY_STAINED_GLASS_PANE'
+  actions:
+    all:
+      sound:
+        name: 'BLOCK_STONE_PLACE'
+        pitch: 0.5
+        volume: 0.5
+
+icons:
+  go-to-spawn:
+    name: '&b&nTeleport to spawn'
+    material: 'CYAN_BED'
+    position:
+      x: 2
+      y: 1
+    amount: 16
+    lore:
+      - 'This will make you run &b/spawn&7.'
+    actions:
+      all:
+        player-run-commands:
+          - '/spawn'
+        console-run-commands:
+          - '/say %username% went to spawn'
+        sound:
+          name: 'ENTITY_ENDERMAN_TELEPORT'
+          pitch: 2.0
+          only-for-player: false
+  tool:
+    name: '&d&nPink helmet!'
+    material: 'LEATHER_HELMET'
+    position:
+      x: 3
+      y: 1
+    remove-durability: 300
+    actions:
+      left-click, right-click:
+        console-run-commands:
+          - '/say %username% left or right clicked an icon'
+      middle-click, drop:
+        console-run-commands:
+          - '/say %username% middle-clicked or dropped an icon'
+      all:
+        player-run-commands:
+          - '/give %username% LEATHER_HELMET 1'
+        close-menu: true
+    enchantments:
+      allow-unsafe: true
+      protection: 25
+      unbreaking: 5
+      mending: 1
+    color:
+      r: 255
+      g: 0
+      b: 255
+  head:
+    name: '&a&n%username%''s head!'
+    material: 'PLAYER_HEAD'
+    position:
+      x: 4
+      y: 1
+    enchantments:
+      allow-unsafe: true
+      infinity: 10
+    skull-owner: '%username%'
+  banner:
+    name: '&e&nA yellow banner'
+    material: 'YELLOW_BANNER'
+    banner-patterns:
+      - 'border: white'
+      - 'cross: black'
+  bank:
+    name: '&6&nBank'
+    material: 'SUNFLOWER'
+    position:
+      x: 5
+      y: 1
+    lore:
+      - '&fLeft-Click:'
+      - '&7Sell a gold ingot for &b$2&7.'
+      - ' '
+      - '&fRight-Click:'
+      - '&7Buy a gold ingot for &b$20&7.'
+      - ' '
+      - '&fMiddle-Click:'
+      - '&7Check your balance.'
+    actions:
+      left-click:
+        requirements:
+          1:
+            has-items:
+              1:
+                material: 'GOLD_INGOT'
+                minimum-amount: 1
+            actions-if-not-met:
+              close-menu: true
+              message:
+                type: 'STANDARD' # standard, json
+                text:
+                  - '&bBank error:'
+                  - '&7You don''t have any &6gold ingots&7 to sell.'
+                broadcast: false
+        remove-items:
+          1:
+            material: 'GOLD_INGOT'
+            amount: 1
+        add-balance: 2
+      right-click:
+        requirements:
+          1:
+            minimum-balance: 20
+            actions-if-not-met:
+              close-menu: true
+              message:
+                text:
+                  - '&bBank error:'
+                  - '&7You don''t have at least &b$20&7 in your balance.'
+          2:
+            permission: 'examplemenu.buygold'
+            actions-if-not-met:
+              close-menu: true
+              message:
+                text:
+                  - '&bBank error:'
+                  - '&7You don''t have the permission &bexamplemenu.buygold&7!'
+        remove-balance: 20
+        add-items:
+          1:
+            material: 'GOLD_INGOT'
+            name: 'Gold!'
+            lore:
+              - '&7Purchased from the &bExample Menu&7!'
+            amount: 1
+      middle-click:
+        message:
+          text:
+            - '&b&lBank: &7You have &b$%balance%&7.'
+        sound:
+          name: 'ENTITY_EXPERIENCE_ORB_PICKUP'
+          pitch: 2.0
+  other-menu:
+    name: '&c&nOpen another menu'
+    material: 'ENDER_CHEST'
+    position:
+      x: 6
+      y: 1
+    lore:
+      - 'Opens another menu.'
+      - '&cBy default, this menu does not exist,'
+      - '&cand this button will not work.'
+    actions:
+      all:
+        open-menu: 'another-menu'
+  change-server:
+    name: '&2&nTransfer to another Bungee server'
+    material: 'ENDER_PEARL'
+    position:
+      x: 7
+      y: 1
+    lore:
+      - 'If this server is running BungeeCord, this'
+      - 'will send you to the server ''&blobby&7'','
+      - 'if it is running and set in BC''s config.'
+    actions:
+      all:
+        server: 'lobby'
+  close-menu:
+    name: '&4&nClose menu'
+    material: 'SPRUCE_DOOR'
+    position:
+      x: 4
+      y: 2

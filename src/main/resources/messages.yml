@@ -1,0 +1,12 @@
+common:
+  prefix: '&b&lElementalMenus:&7' #TODO
+
+menus:
+  not-loaded:
+    - '%prefix% Menu ''&b%menu%&7'' is unavailable, please notify the server''s administration.' #TODO
+
+  faulty-config:
+    - '%prefix% Menu ''&b%menu%&7'' is configured incorrectly, please notify the server''s administration.' #TODO
+
+  closed-reload:
+    - '%prefix% Menu closed due to ElementalMenus being reloaded or disabled.' #TODO

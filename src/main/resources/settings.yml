@@ -1,0 +1,6 @@
+menu-settings:
+  icon-name-prefix: '&f' #TODO
+  icon-lore-prefix: '&7' #TODO
+  icon-interact-cooldown: 500 #in milliseconds #TODO
+
+check-for-updates: true #TODO

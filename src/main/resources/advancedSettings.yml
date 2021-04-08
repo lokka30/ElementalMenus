@@ -1,0 +1,6 @@
+compatibility-manager:
+  suppressions:
+    SERVER_VERSION: false
+
+menus:
+  commands-prefixed-with-slash: true #TODO
