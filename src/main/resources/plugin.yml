@@ -1,7 +1,26 @@
 name: 'ElementalMenus'
+
 version: '${project.version}'
+
 main: 'me.lokka30.elementalmenus.ElementalMenus'
+
 description: '${project.description}'
+
 api-version: '1.13'
-load: POSTWORLD
+
+load: 'POSTWORLD'
+
 softdepend: ['Vault']
+
+commands:
+  menu:
+    description: 'Manage menus from ElementalMenus.'
+
+  elementalmenus:
+    description: 'Manage the ElementalMenus plugin.'
+
+permissions:
+  elementalmenus.*:
+    default: op
+    description: 'All permissions for the ElementalMenus plugin.'
+#TODO

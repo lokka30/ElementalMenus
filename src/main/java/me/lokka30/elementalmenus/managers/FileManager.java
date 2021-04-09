@@ -52,11 +52,12 @@ public class FileManager {
             for(String menuFileName : filesInDirectory) {
                 if(menuFileName.endsWith(".yml") || menuFileName.endsWith(".yaml")) {
                     //Check the name of the file
+                    final String[] menuNameParts = menuFileName.split("\\.");
                     if(menuFileName.contains(" ")) {
                         Utils.LOGGER.error("Unable to load menu '&b" + menuFileName + "&7', file name may not contain spaces &8(&7' '&8)&7.");
                         continue;
                     }
-                    if(menuFileName.split("\\.").length > 1) {
+                    if(menuNameParts.length > 2) {
                         Utils.LOGGER.error("Unable to load menu '&b" + menuFileName + "&7', file name may not contain periods &8('&b.&7'&8)&7, with exception to the file extension.");
                         continue;
                     }
@@ -64,22 +65,23 @@ public class FileManager {
                     //File and YamlConfigFile of the menu
                     File menuFile = new File(main.getDataFolder() + File.separator + "menus" + File.separator + menuFileName);
                     YamlConfigFile menuCfg = new YamlConfigFile(main, menuFile);
+                    final String menuName = menuNameParts[0];
 
                     // attempt to load it.
                     try {
                         menuCfg.load();
                     } catch(IOException ex) {
-                        Utils.LOGGER.error("Unable to load menu '&b" + menuFileName + "&7'! Stack trace:");
+                        Utils.LOGGER.error("Unable to load menu '&b" + menuName + "&7'! Stack trace:");
                         ex.printStackTrace();
                         continue;
                     }
 
                     // if it's enabled, add it to the loaded menus list
                     if(menuCfg.getConfig().getBoolean("menu.enabled", false)) {
-                        main.menus.put(menuFileName, menuCfg);
-                        Utils.LOGGER.info("Loaded menu '&b" + menuFileName + "&7'.");
+                        main.menus.add(new MenuManager.Menu(menuFileName, menuCfg));
+                        Utils.LOGGER.info("Loaded menu '&b" + menuName + "&7'.");
                     } else {
-                        Utils.LOGGER.info("Skipped loading of menu '&b" + menuFileName + "&7' as it is disabled at path '&bmenus.enabled&7'.");
+                        Utils.LOGGER.info("Skipped loading of menu '&b" + menuName + "&7' as it is disabled at path '&bmenus.enabled&7'.");
                     }
                 } else {
                     Utils.LOGGER.warning("File '&b" + menuFileName + "&7' found in the '&bmenus&7' folder, but it isn't a valid menu - skipping.");
