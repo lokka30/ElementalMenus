@@ -6,9 +6,10 @@ A planned 'GUI' plugin for SpigotMC servers, deep in development.
 * Will not support 'run commands as OP' due to security concerns. Have console run the command instead, if possible.
 
 # To-do
-* File loader
-* Menu loader
+* ~~File loader~~ (Completed)
+* ~~Menu loader~~ (Completed)
 * Commands  
+* Menus  
 * Menu signs
 * Custom placeholders
   * Symbols by default

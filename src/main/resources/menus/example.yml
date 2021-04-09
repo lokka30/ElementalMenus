@@ -1,6 +1,5 @@
 menu:
   enabled: false
-  id: 'example'
   title: '&3&nExample Menu'
   rows: 3
   auto-refresh: 3

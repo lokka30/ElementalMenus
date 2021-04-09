@@ -10,7 +10,7 @@ import me.lokka30.microlib.YamlConfigFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class ElementalMenus extends JavaPlugin {
 
@@ -32,7 +32,7 @@ public class ElementalMenus extends JavaPlugin {
     public final YamlConfigFile settingsCfg = new YamlConfigFile(this, new File(getDataFolder(), "settings.yml"));
     public final YamlConfigFile advancedSettingsCfg = new YamlConfigFile(this, new File(getDataFolder(), "advancedSettings.yml"));
     public final YamlConfigFile messagesCfg = new YamlConfigFile(this, new File(getDataFolder(), "messages.yml"));
-    public final HashSet<YamlConfigFile> menusCfg = new HashSet<>();
+    public final HashMap<String, YamlConfigFile> menus = new HashMap<>();
 
     /**
      * This method is called when Bukkit enables the plugin.
