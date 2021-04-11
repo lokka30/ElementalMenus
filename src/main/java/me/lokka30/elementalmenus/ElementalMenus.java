@@ -1,17 +1,24 @@
 package me.lokka30.elementalmenus;
 
 import me.lokka30.elementalmenus.commands.ElementalMenusCommand;
-import me.lokka30.elementalmenus.commands.MenuCommand;
 import me.lokka30.elementalmenus.managers.*;
+import me.lokka30.elementalmenus.objects.Menu;
 import me.lokka30.elementalmenus.utils.Utils;
 import me.lokka30.microlib.QuickTimer;
 import me.lokka30.microlib.YamlConfigFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashSet;
 
 public class ElementalMenus extends JavaPlugin {
+
+    /**
+     * A list of developers and contributors to the resource.
+     */
+    public final HashSet<String> developers = new HashSet<>(Collections.singletonList("lokka30"));
+    public final HashSet<String> contributors = new HashSet<>();
 
     /*
     Manager classes. These classes contain most of the
@@ -32,7 +39,7 @@ public class ElementalMenus extends JavaPlugin {
     public final YamlConfigFile settingsCfg = new YamlConfigFile(this, new File(getDataFolder(), "settings.yml"));
     public final YamlConfigFile advancedSettingsCfg = new YamlConfigFile(this, new File(getDataFolder(), "advancedSettings.yml"));
     public final YamlConfigFile messagesCfg = new YamlConfigFile(this, new File(getDataFolder(), "messages.yml"));
-    public final HashSet<MenuManager.Menu> menus = new HashSet<>();
+    public final HashSet<Menu> menus = new HashSet<>();
 
     /**
      * This method is called when Bukkit enables the plugin.
@@ -44,7 +51,6 @@ public class ElementalMenus extends JavaPlugin {
 
         fileManager.loadFiles();
         menuManager.loadMenus();
-        commandManager.registerCommand("menu", new MenuCommand(this));
         commandManager.registerCommand("elementalmenus", new ElementalMenusCommand(this));
         compatibilityManager.checkCompatibility();
         updateManager.checkForUpdates();

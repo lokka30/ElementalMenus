@@ -1,6 +1,7 @@
 package me.lokka30.elementalmenus.managers;
 
 import me.lokka30.elementalmenus.ElementalMenus;
+import me.lokka30.elementalmenus.objects.Menu;
 import me.lokka30.elementalmenus.utils.Utils;
 import me.lokka30.microlib.YamlConfigFile;
 
@@ -78,7 +79,7 @@ public class FileManager {
 
                     // if it's enabled, add it to the loaded menus list
                     if(menuCfg.getConfig().getBoolean("menu.enabled", false)) {
-                        main.menus.add(new MenuManager.Menu(menuFileName, menuCfg));
+                        main.menus.add(new Menu(menuFileName, menuCfg));
                         Utils.LOGGER.info("Loaded menu '&b" + menuName + "&7'.");
                     } else {
                         Utils.LOGGER.info("Skipped loading of menu '&b" + menuName + "&7' as it is disabled at path '&bmenus.enabled&7'.");
@@ -90,5 +91,10 @@ public class FileManager {
         }
 
         Utils.LOGGER.info("Loaded a total of &b" + main.menus.size() + "&7 menus.");
+    }
+
+
+    public void backupFiles() {
+        //TODO
     }
 }

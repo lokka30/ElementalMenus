@@ -3,6 +3,7 @@ package me.lokka30.elementalmenus.managers;
 import me.lokka30.elementalmenus.ElementalMenus;
 import me.lokka30.elementalmenus.utils.Utils;
 import me.lokka30.microlib.VersionUtils;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashSet;
@@ -32,7 +33,7 @@ public class CompatibilityManager {
         }
     }
 
-    private static class Incompatibility {
+    public static class Incompatibility {
         enum Type {
             SERVER_VERSION
         }
@@ -56,13 +57,25 @@ public class CompatibilityManager {
     public void parseJoin(final PlayerJoinEvent event) {
         //TODO print incompatibilities to admins.
         // incompatibilities.size() incompatibilities were found
+        if (incompatibilities.isEmpty()) return;
+
+        final Player player = event.getPlayer();
+
+        if (!player.hasPermission("elementalmenu.receive-compatibility-reports")) return;
+
+        player.sendMessage("The compatibility checker found " + incompatibilities.size() + " possible incompatibilities with your server configuration.");
+        player.sendMessage("Please run '/menu compatibility' to view these possible incompatibilities.");
     }
 
     private void checkServerVersion() {
-        if(isNotSuppressed(Incompatibility.Type.SERVER_VERSION)) {
-            if(!VersionUtils.isOneThirteen()) {
+        if (isNotSuppressed(Incompatibility.Type.SERVER_VERSION)) {
+            if (!VersionUtils.isOneThirteen()) {
                 incompatibilities.add(new Incompatibility(Incompatibility.Type.SERVER_VERSION, "Oldest supported Minecraft server version of the plugin is &b1.13&7."));
             }
         }
+    }
+
+    public HashSet<Incompatibility> getIncompatibilities() {
+        return incompatibilities;
     }
 }

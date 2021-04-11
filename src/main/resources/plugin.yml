@@ -13,11 +13,9 @@ load: 'POSTWORLD'
 softdepend: ['Vault']
 
 commands:
-  menu:
-    description: 'Manage menus from ElementalMenus.'
-
   elementalmenus:
     description: 'Manage the ElementalMenus plugin.'
+    aliases: [ 'menu', 'menus', 'elementalmenu', 'emenu', 'emenus' ]
 
 permissions:
   elementalmenus.*:
