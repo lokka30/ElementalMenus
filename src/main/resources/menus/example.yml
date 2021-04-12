@@ -210,10 +210,13 @@ icons:
       - 'if it is running and set in BC''s config.'
     actions:
       all:
-        server: 'lobby'
+        change-server: 'lobby'
   close-menu:
     name: '&4&nClose menu'
     material: 'SPRUCE_DOOR'
     position:
       x: 4
       y: 2
+    actions:
+      all:
+        close-menu: true

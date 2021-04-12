@@ -1,12 +1,20 @@
 common:
   prefix: '&b&lElementalMenus:&7' #TODO
+  warning: '&eWarning:&7'
+  error: '&cError:&7' #TODO
 
 menus:
   not-loaded:
-    - '%prefix% Menu ''&b%menu%&7'' is unavailable, please notify the server''s administration.' #TODO
+    - '%prefix% %error% Menu ''&b%menu%&7'' is unavailable, please notify the server''s administration.' #TODO
 
   faulty-config:
-    - '%prefix% Menu ''&b%menu%&7'' is configured incorrectly, please notify the server''s administration.' #TODO
+    - '%prefix% %error% Menu ''&b%menu%&7'' is configured incorrectly, please notify the server''s administration.' #TODO
 
   closed-reload:
-    - '%prefix% Menu closed due to ElementalMenus being reloaded or disabled.' #TODO
+    - '%prefix% %warning% Current menu has been closed due to ElementalMenus being reloaded or disabled.' #TODO
+
+  menu-already-open-self:
+    - '%prefix% %error% That menu is currently open.' #TODO
+
+  menu-already-open-other:
+    - '%prefix% &r%displayName%&7 already has that menu open.' #TODO

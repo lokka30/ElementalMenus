@@ -49,6 +49,8 @@ public class ElementalMenus extends JavaPlugin {
         QuickTimer timer = new QuickTimer();
         Utils.LOGGER.info("&fInitiating start-up procedure...");
 
+        instance = this;
+
         fileManager.loadFiles();
         menuManager.loadMenus();
         commandManager.registerCommand("elementalmenus", new ElementalMenusCommand(this));
@@ -69,5 +71,16 @@ public class ElementalMenus extends JavaPlugin {
         //TODO
 
         Utils.LOGGER.info("&fShut-down complete &8(&7took &b" + timer.getTimer() + "ms&8)");
+    }
+
+    /*
+    Use dependency injection wherever possible
+    For small things such as Menu Icon Actions getting a value from
+    the settings file, it's fine to use getInstance().
+     */
+    private static ElementalMenus instance;
+
+    public static ElementalMenus getInstance() {
+        return instance;
     }
 }

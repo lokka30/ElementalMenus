@@ -3,4 +3,4 @@ compatibility-manager:
     SERVER_VERSION: false
 
 menus:
-  commands-prefixed-with-slash: true #TODO
+  commands-prefixed-with-slash: true
