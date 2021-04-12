@@ -1,6 +1,6 @@
 package me.lokka30.elementalmenus.menus.actions;
 
-import me.lokka30.elementalmenus.menus.Icon;
+import me.lokka30.elementalmenus.menus.icons.DetectableItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,14 +9,14 @@ import java.util.HashSet;
 
 public class RemoveItemsAction implements Action {
 
-    HashSet<Icon.DetectableItem> itemsToRemove;
+    HashSet<DetectableItem> itemsToRemove;
 
-    public RemoveItemsAction(HashSet<Icon.DetectableItem> itemsToRemove) {
+    public RemoveItemsAction(HashSet<DetectableItem> itemsToRemove) {
         this.itemsToRemove = itemsToRemove;
     }
 
     @Override
-    public void act(Player player) {
+    public void parse(Player player) {
         itemsToRemove.forEach(detectableItem -> {
             for (ItemStack itemInInventory : player.getInventory().getContents()) {
                 if (itemInInventory.getType() != detectableItem.getMaterial()) continue;

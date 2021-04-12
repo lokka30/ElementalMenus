@@ -3,7 +3,7 @@ package me.lokka30.elementalmenus;
 import me.lokka30.elementalmenus.commands.ElementalMenusCommand;
 import me.lokka30.elementalmenus.managers.*;
 import me.lokka30.elementalmenus.menus.Menu;
-import me.lokka30.elementalmenus.utils.Utils;
+import me.lokka30.elementalmenus.misc.Utils;
 import me.lokka30.microlib.QuickTimer;
 import me.lokka30.microlib.YamlConfigFile;
 import org.bukkit.plugin.java.JavaPlugin;

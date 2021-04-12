@@ -1,7 +1,8 @@
 package me.lokka30.elementalmenus.menus;
 
 import me.lokka30.elementalmenus.ElementalMenus;
-import me.lokka30.elementalmenus.utils.Utils;
+import me.lokka30.elementalmenus.menus.icons.Icon;
+import me.lokka30.elementalmenus.misc.Utils;
 import me.lokka30.microlib.MessageUtils;
 import me.lokka30.microlib.YamlConfigFile;
 import org.bukkit.Bukkit;

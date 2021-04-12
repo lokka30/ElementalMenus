@@ -11,7 +11,7 @@ public class ChangeServerAction implements Action {
     }
 
     @Override
-    public void act(Player player) {
+    public void parse(Player player) {
         //TODO
     }
 }

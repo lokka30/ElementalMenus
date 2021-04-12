@@ -14,7 +14,7 @@ public class OpenOtherMenuAction implements Action {
     }
 
     @Override
-    public void act(Player player) {
+    public void parse(Player player) {
         player.closeInventory();
 
         // 1 tick delay to avoid issues

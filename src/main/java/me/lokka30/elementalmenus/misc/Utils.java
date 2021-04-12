@@ -1,4 +1,4 @@
-package me.lokka30.elementalmenus.utils;
+package me.lokka30.elementalmenus.misc;
 
 import me.lokka30.microlib.MicroLogger;
 
@@ -22,5 +22,13 @@ public class Utils {
             return max;
         }
         return Math.max(current, min);
+    }
+
+    public static Object getDefaultIfNull(Object obj1, Object obj2) {
+        if (obj1 == null) {
+            return obj2;
+        } else {
+            return obj1;
+        }
     }
 }

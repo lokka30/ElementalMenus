@@ -3,13 +3,13 @@ package me.lokka30.elementalmenus.menus.actions;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-public class SoundAction implements Action {
+public class PlaySoundAction implements Action {
 
     Sound sound;
     float pitch, volume;
     boolean onlyForPlayer;
 
-    public SoundAction(Sound sound, float pitch, float volume, boolean onlyForPlayer) {
+    public PlaySoundAction(Sound sound, float pitch, float volume, boolean onlyForPlayer) {
         this.sound = sound;
         this.pitch = pitch;
         this.volume = volume;
@@ -17,7 +17,7 @@ public class SoundAction implements Action {
     }
 
     @Override
-    public void act(Player player) {
+    public void parse(Player player) {
         if (onlyForPlayer) {
             player.playSound(player.getLocation(), sound, pitch, volume);
         } else {

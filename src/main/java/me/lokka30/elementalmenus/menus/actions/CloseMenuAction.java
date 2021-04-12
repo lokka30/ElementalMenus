@@ -11,7 +11,7 @@ public class CloseMenuAction implements Action {
     }
 
     @Override
-    public void act(Player player) {
+    public void parse(Player player) {
         if (closeMenu) player.closeInventory();
     }
 }

@@ -8,10 +8,13 @@ A planned 'GUI' plugin for SpigotMC servers, deep in development.
 # To-do
 * ~~File loader~~ (Completed)
 * ~~Menu loader~~ (Completed)
-* Commands  
-* Menus  
+* Menu actions
+* Menu conditions
+* Menu listeners
+* Commands
+* Menus
 * Menu signs
 * Custom placeholders
   * Symbols by default
-* XP give/take actions.    
+* XP give/take actions.
 * PlaceholderAPI.

@@ -6,15 +6,18 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class ConsoleRunCommandsAction implements Action {
-    List<String> commands;
+public class RunCommandsAction implements Action {
 
-    public ConsoleRunCommandsAction(List<String> commands) {
+    List<String> commands;
+    boolean ranByConsole;
+
+    public RunCommandsAction(List<String> commands, boolean ranByConsole) {
         this.commands = commands;
+        this.ranByConsole = ranByConsole;
     }
 
     @Override
-    public void act(Player player) {
+    public void parse(Player player) {
         final boolean prefixedWithSlash = ElementalMenus.getInstance().advancedSettingsCfg.getConfig().getBoolean("menus.commands-prefixed-with-slash", true);
 
         commands.forEach(command -> {
@@ -24,7 +27,11 @@ public class ConsoleRunCommandsAction implements Action {
                     .replace("%username%", player.getName())
                     .replace("%displayname%", player.getDisplayName());
 
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            if (ranByConsole) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            } else {
+                Bukkit.dispatchCommand(player, command);
+            }
         });
     }
 }

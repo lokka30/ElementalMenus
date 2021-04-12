@@ -2,7 +2,7 @@ package me.lokka30.elementalmenus.managers;
 
 import me.lokka30.elementalmenus.ElementalMenus;
 import me.lokka30.elementalmenus.menus.Menu;
-import me.lokka30.elementalmenus.utils.Utils;
+import me.lokka30.elementalmenus.misc.Utils;
 import me.lokka30.microlib.YamlConfigFile;
 
 import java.io.File;
