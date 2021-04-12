@@ -3,6 +3,10 @@ package me.lokka30.elementalmenus.utils;
 import me.lokka30.microlib.MicroLogger;
 
 public class Utils {
+
+    /**
+     * The plugin's logging system (send messages to console)
+     */
     public static final MicroLogger LOGGER = new MicroLogger("&b&lElementalMenus: &7");
 
     /**
@@ -17,7 +21,6 @@ public class Utils {
         if (current > max) {
             return max;
         }
-
         return Math.max(current, min);
     }
 }

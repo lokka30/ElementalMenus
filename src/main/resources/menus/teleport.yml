@@ -1,0 +1,117 @@
+menu:
+  enabled: false
+  title: '&3&nTeleport Menu'
+  rows: 1
+  auto-refresh: 3
+
+  open-with:
+    commands:
+      - 'tpmenu'
+
+    items:
+      1:
+        material: 'COMPASS'
+        interaction:
+          left-click: false
+          middle-click: false
+          right-click: true
+
+  actions-on-open:
+    sound:
+      name: 'BLOCK_CHEST_OPEN'
+      pitch: 1.5
+
+  actions-on-close:
+    sound:
+      name: 'BLOCK_CHEST_CLOSE'
+      pitch: 1.5
+
+filler-icon:
+  name: '&f&nTeleport Menu'
+  material: 'GRAY_STAINED_GLASS_PANE'
+  lore:
+    - 'This is an example ElementalMenus'
+    - 'menu, disabled by default.'
+    - 'Press on any icon to teleport'
+    - 'around the server.'
+  actions:
+    all:
+      sound:
+        name: 'BLOCK_STONE_PLACE'
+        pitch: 0.5
+        volume: 0.5
+
+icons:
+  spawn:
+    name: '&b&nSpawn'
+    material: 'BEACON'
+    position:
+      x: 2
+      y: 0
+    lore:
+      - 'Click to go to spawn'
+    actions:
+      all:
+        player-run-commands:
+          - '/spawn'
+        sound:
+          name: 'ENTITY_EXPERIENCE_ORB_PICKUP'
+          pitch: 2.0
+          only-for-player: false
+  home:
+    name: '&b&nHome'
+    material: 'CYAN_BED'
+    position:
+      x: 3
+      y: 0
+    lore:
+      - 'Click to go to home'
+    actions:
+      all:
+        player-run-commands:
+          - '/home'
+        sound:
+          name: 'ENTITY_EXPERIENCE_ORB_PICKUP'
+          pitch: 2.0
+          only-for-player: false
+  hub:
+    name: '&b&nHub'
+    material: 'ENDER_PEARL'
+    position:
+      x: 4
+      y: 0
+    lore:
+      - 'Click to go to the hub'
+    actions:
+      all:
+        player-run-commands:
+          - '/hub'
+        sound:
+          name: 'ENTITY_EXPERIENCE_ORB_PICKUP'
+          pitch: 2.0
+          only-for-player: false
+  warp:
+    name: '&b&nWarp'
+    material: 'EYE_OF_ENDER'
+    position:
+      x: 5
+      y: 0
+    lore:
+      - 'Click to go to to a warp'
+    actions:
+      all:
+        player-run-commands:
+          - '/warp'
+        sound:
+          name: 'ENTITY_EXPERIENCE_ORB_PICKUP'
+          pitch: 2.0
+          only-for-player: false
+  close-menu:
+    name: '&4&nClose menu'
+    material: 'SPRUCE_DOOR'
+    position:
+      x: 6
+      y: 0
+    actions:
+      all:
+        close-menu: true

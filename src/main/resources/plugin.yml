@@ -1,24 +1,39 @@
+#############################################
+#              (!) WARNING (!)              #
+#             To server owners:             #
+# This is NOT a configuration file.         #
+# You are not meant to modify this file.    #
+# This file is read by Spigot's plugin      #
+# loader, so changing any values in this    #
+# file may cause the plugin to malfunction. #
+#          To repeat one last time:         #
+#  This  Is  Not  A  Configuration  File!!  #
+#############################################
+
+# The following entries should not be modified
+# without permission from the author.
 name: 'ElementalMenus'
-
 version: '${project.version}'
-
 main: 'me.lokka30.elementalmenus.ElementalMenus'
-
 description: '${project.description}'
-
 api-version: '1.13'
 
+# At which stage of the startup process should
+# Bukkit load ElementalMenus?
 load: 'POSTWORLD'
 
-softdepend: ['Vault']
+# (soft) dependencies of the plugin:
+softdepend: [ 'Vault' ]
 
+# Base commands the plugin registers:
 commands:
   elementalmenus:
     description: 'Manage the ElementalMenus plugin.'
     aliases: [ 'menu', 'menus', 'elementalmenu', 'emenu', 'emenus' ]
 
+# Permissions the plugin has:
 permissions:
   elementalmenus.*:
     default: op
     description: 'All permissions for the ElementalMenus plugin.'
-#TODO
+  #TODO
