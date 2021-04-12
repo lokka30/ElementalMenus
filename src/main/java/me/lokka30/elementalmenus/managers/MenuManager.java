@@ -2,7 +2,7 @@ package me.lokka30.elementalmenus.managers;
 
 import com.sun.istack.internal.Nullable;
 import me.lokka30.elementalmenus.ElementalMenus;
-import me.lokka30.elementalmenus.objects.Menu;
+import me.lokka30.elementalmenus.menus.Menu;
 import org.bukkit.boss.BossBar;
 import org.bukkit.event.Listener;
 
