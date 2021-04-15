@@ -1,5 +1,6 @@
 package me.lokka30.elementalmenus.misc;
 
+import me.lokka30.elementalmenus.ElementalMenus;
 import me.lokka30.microlib.MicroLogger;
 
 public class Utils {
@@ -24,11 +25,18 @@ public class Utils {
         return Math.max(current, min);
     }
 
+    //TODO Check if this is required.
     public static Object getDefaultIfNull(Object obj1, Object obj2) {
         if (obj1 == null) {
             return obj2;
         } else {
             return obj1;
+        }
+    }
+
+    public static void sendDebugLog(final DebugCategory category, final String msg) {
+        if (ElementalMenus.getInstance().advancedSettingsCfg.getConfig().getStringList("debug-categories").contains(category.toString())) {
+            Utils.LOGGER.info("&8(&bDEBUG &8- &f" + category + "&8): &7" + msg);
         }
     }
 }

@@ -84,6 +84,7 @@ public class SendMessageAction implements Action {
 
                 BossBar bossBar = Bukkit.createBossBar("", bossBarExtraInfo.getBarColor(), bossBarExtraInfo.getBarStyle(), bossBarExtraInfo.getBarFlags());
                 bossBarRecipients.forEach(bossBar::addPlayer);
+                bossBarRecipients.forEach(recipient -> ElementalMenus.getInstance().menuManager.bossBarsToRemoveOnQuit.put(player.getUniqueId(), bossBar));
 
                 for (int i = 0; i < messages.size(); i++) {
                     boolean isLastMessage = (i == messages.size() - 1);
