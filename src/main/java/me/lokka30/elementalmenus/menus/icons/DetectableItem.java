@@ -4,7 +4,15 @@ import org.bukkit.Material;
 
 import java.util.HashSet;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class DetectableItem {
+
     private final Material material;
     private final int amount;
     private final String displayName;

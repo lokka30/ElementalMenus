@@ -5,9 +5,17 @@ import me.lokka30.elementalmenus.misc.Utils;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class CommandManager {
 
     private final ElementalMenus main;
+
     public CommandManager(final ElementalMenus main) { this.main = main; }
 
     public void registerCommand(String command, TabExecutor clazz) {

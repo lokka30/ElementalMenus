@@ -8,6 +8,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class Icon {
 
     final int[] slots;

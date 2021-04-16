@@ -3,6 +3,13 @@ package me.lokka30.elementalmenus.menus.actions;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class PlaySoundAction implements Action {
 
     Sound sound;

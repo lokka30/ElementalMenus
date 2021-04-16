@@ -14,6 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class ElementalMenusCommand implements TabExecutor {
 
     private final ElementalMenus main;

@@ -6,6 +6,13 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class RunCommandsAction implements Action {
 
     List<String> commands;

@@ -7,6 +7,13 @@ import org.bukkit.command.CommandSender;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class ReloadSubcommand implements ElementalMenusCommand.Subcommand {
 
     @Override

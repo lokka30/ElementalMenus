@@ -12,7 +12,13 @@ import org.bukkit.inventory.Inventory;
 
 import java.util.HashSet;
 
-@SuppressWarnings("unused")
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class Menu {
     public final String name;
     public final YamlConfigFile config;

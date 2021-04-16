@@ -8,9 +8,17 @@ import me.lokka30.microlib.YamlConfigFile;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class FileManager {
 
     private final ElementalMenus main;
+
     public FileManager(final ElementalMenus main) { this.main = main; }
 
     public void loadFiles() {

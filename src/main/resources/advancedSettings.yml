@@ -4,3 +4,6 @@ compatibility-manager:
 
 menus:
   commands-prefixed-with-slash: true
+
+debug:
+  categories: [ ]

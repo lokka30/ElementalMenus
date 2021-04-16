@@ -17,6 +17,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class SendMessageAction implements Action {
 
     MessageType type;
@@ -49,6 +56,13 @@ public class SendMessageAction implements Action {
                 }
                 break;
             case ACTION_BAR:
+                try {
+                    Class.forName("org.bukkit.entity.Player.Spigot");
+                } catch (ClassNotFoundException e) {
+                    Utils.LOGGER.error("You must be using &bSpigotMC&7 (or a derivative such as &bPaperMC&7) to utilise the &bAction Bar&7 messaging type, since it relies on Spigot code to function.");
+                    break;
+                }
+
                 ActionBarExtraInfo actionBarExtraInfo = (ActionBarExtraInfo) extraInfo;
 
                 HashSet<Player> actionBarRecipients = new HashSet<>();

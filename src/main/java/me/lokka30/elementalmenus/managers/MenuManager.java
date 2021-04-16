@@ -13,9 +13,17 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.util.HashMap;
 import java.util.UUID;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class MenuManager implements Listener {
 
     private final ElementalMenus main;
+
     public MenuManager(final ElementalMenus main) {
         this.main = main;
     }

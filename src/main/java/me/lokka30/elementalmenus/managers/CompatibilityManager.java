@@ -8,9 +8,17 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashSet;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class CompatibilityManager {
 
     private final ElementalMenus main;
+
     public CompatibilityManager(final ElementalMenus main) { this.main = main; }
 
     private final HashSet<Incompatibility> incompatibilities = new HashSet<>();
@@ -24,6 +32,7 @@ public class CompatibilityManager {
         Utils.LOGGER.info("Checking compatibility...");
 
         checkServerVersion();
+        checkServerSoftware();
 
         if(incompatibilities.size() == 0) {
             Utils.LOGGER.info("Compatibility checks completed, no possible incompatibilities found.");
@@ -35,7 +44,8 @@ public class CompatibilityManager {
 
     public static class Incompatibility {
         enum Type {
-            SERVER_VERSION
+            SERVER_VERSION,
+            SERVER_SOFTWARE
         }
 
         private final Type type;
@@ -47,6 +57,7 @@ public class CompatibilityManager {
         }
 
         public Type getType() { return type; }
+
         public String getReason() { return reason; }
     }
 
@@ -71,6 +82,21 @@ public class CompatibilityManager {
         if (isNotSuppressed(Incompatibility.Type.SERVER_VERSION)) {
             if (!VersionUtils.isOneThirteen()) {
                 incompatibilities.add(new Incompatibility(Incompatibility.Type.SERVER_VERSION, "Oldest supported Minecraft server version of the plugin is &b1.13&7."));
+            }
+        }
+    }
+
+    /**
+     * The server should be running a Spigot (or derivative)
+     * as ElementalMenus utilises Spigot code, such as sending
+     * action bar messages to players.
+     */
+    private void checkServerSoftware() {
+        try {
+            Class.forName("org.bukkit.entity.Player.Spigot");
+        } catch (ClassNotFoundException e) {
+            if (isNotSuppressed(Incompatibility.Type.SERVER_SOFTWARE)) {
+                incompatibilities.add(new Incompatibility(Incompatibility.Type.SERVER_SOFTWARE, "ElenmentalMenus requires the &bSpigotMC&7 software to be used (or a derivative such as PaperMC) to provide full functionality. Server software such as CraftBukkit is unsupported by the ElementalMenus team."));
             }
         }
     }

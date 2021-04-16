@@ -12,6 +12,13 @@ import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 
+/**
+ * TODO Describe...
+ *
+ * @author lokka30
+ * @contributors none
+ * @since v0.0
+ */
 public class ElementalMenus extends JavaPlugin {
 
     /**
