@@ -6,8 +6,8 @@ A planned 'GUI' plugin for SpigotMC servers, deep in development.
 * Will not support 'run commands as OP' due to security concerns. Have console run the command instead, if possible.
 
 # To-do
-* ~~File loader~~ (Completed)
-* ~~Menu loader~~ (Completed)
+* Icon loading
+* Icon listener
 * Menu actions
 * Menu conditions
 * Menu listeners

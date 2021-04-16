@@ -15,7 +15,6 @@ import org.bukkit.command.TabExecutor;
 public class CommandManager {
 
     private final ElementalMenus main;
-
     public CommandManager(final ElementalMenus main) { this.main = main; }
 
     public void registerCommand(String command, TabExecutor clazz) {
