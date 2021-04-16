@@ -6,6 +6,7 @@ import me.lokka30.elementalmenus.menus.Menu;
 import me.lokka30.elementalmenus.misc.Utils;
 import me.lokka30.microlib.QuickTimer;
 import me.lokka30.microlib.YamlConfigFile;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -13,7 +14,9 @@ import java.util.Collections;
 import java.util.HashSet;
 
 /**
- * TODO Describe...
+ * The main class of the plugin. Bukkit calls onEnable
+ * when it loads the plugin, and onDisable when it
+ * disables the plugin.
  *
  * @author lokka30
  * @contributors none
@@ -22,7 +25,12 @@ import java.util.HashSet;
 public class ElementalMenus extends JavaPlugin {
 
     /**
-     * A list of developers and contributors to the resource.
+     * Credits.
+     * <p>
+     * Developers:   Those who regularly develop the resource.
+     * Don't touch this.
+     * Contributors: Those who have contributed code to the
+     * resource.
      */
     public final HashSet<String> developers = new HashSet<>(Collections.singletonList("lokka30"));
     public final HashSet<String> contributors = new HashSet<>();
@@ -75,7 +83,8 @@ public class ElementalMenus extends JavaPlugin {
         QuickTimer timer = new QuickTimer();
         Utils.LOGGER.info("&fInitiating shut-down procedure...");
 
-        //TODO
+        menuManager.menusCurrentlyOpen.keySet().forEach(uuid -> menuManager.getMenu(menuManager.menusCurrentlyOpen.get(uuid))
+                .processEvent(Menu.MenuCloseEventType.CLOSE_DISCONNECT, Bukkit.getPlayer(uuid)));
 
         Utils.LOGGER.info("&fShut-down complete &8(&7took &b" + timer.getTimer() + "ms&8)");
     }
