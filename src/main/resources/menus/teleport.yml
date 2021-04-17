@@ -45,9 +45,10 @@ icons:
   spawn:
     name: '&b&nSpawn'
     material: 'BEACON'
-    position:
-      x: 2
-      y: 0
+    positions:
+      1:
+        x: 2
+        y: 0
     lore:
       - 'Click to go to spawn'
     actions:
@@ -61,9 +62,10 @@ icons:
   home:
     name: '&b&nHome'
     material: 'CYAN_BED'
-    position:
-      x: 3
-      y: 0
+    positions:
+      1:
+        x: 3
+        y: 0
     lore:
       - 'Click to go to home'
     actions:
@@ -77,9 +79,10 @@ icons:
   hub:
     name: '&b&nHub'
     material: 'ENDER_PEARL'
-    position:
-      x: 4
-      y: 0
+    positions:
+      1:
+        x: 4
+        y: 0
     lore:
       - 'Click to go to the hub'
     actions:
@@ -93,9 +96,10 @@ icons:
   warp:
     name: '&b&nWarp'
     material: 'EYE_OF_ENDER'
-    position:
-      x: 5
-      y: 0
+    positions:
+      1:
+        x: 5
+        y: 0
     lore:
       - 'Click to go to to a warp'
     actions:
@@ -109,9 +113,10 @@ icons:
   close-menu:
     name: '&4&nClose menu'
     material: 'SPRUCE_DOOR'
-    position:
-      x: 6
-      y: 0
+    positions:
+      1:
+        x: 6
+        y: 0
     actions:
       all:
         close-menu: true

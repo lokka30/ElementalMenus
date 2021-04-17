@@ -57,9 +57,10 @@ icons:
   go-to-spawn:
     name: '&b&nTeleport to spawn'
     material: 'CYAN_BED'
-    position:
-      x: 2
-      y: 1
+    positions:
+      1:
+        x: 2
+        y: 1
     amount: 16
     lore:
       - 'This will make you run &b/spawn&7.'
@@ -76,9 +77,10 @@ icons:
   tool:
     name: '&d&nPink helmet!'
     material: 'LEATHER_HELMET'
-    position:
-      x: 3
-      y: 1
+    positions:
+      1:
+        x: 3
+        y: 1
     remove-durability: 300
     actions:
       left-click, right-click:
@@ -103,9 +105,10 @@ icons:
   head:
     name: '&a&n%username%''s head!'
     material: 'PLAYER_HEAD'
-    position:
-      x: 4
-      y: 1
+    positions:
+      1:
+        x: 4
+        y: 1
     enchantments:
       allow-unsafe: true
       infinity: 10
@@ -119,9 +122,10 @@ icons:
   bank:
     name: '&6&nBank'
     material: 'SUNFLOWER'
-    position:
-      x: 5
-      y: 1
+    positions:
+      1:
+        x: 5
+        y: 1
     lore:
       - '&fLeft-Click:'
       - '&7Sell a gold ingot for &b$2&7.'
@@ -133,7 +137,7 @@ icons:
       - '&7Check your balance.'
     actions:
       left-click:
-        requirements:
+        conditions:
           1:
             has-items:
               1:
@@ -153,7 +157,7 @@ icons:
             amount: 1
         add-balance: 2
       right-click:
-        requirements:
+        conditions:
           1:
             minimum-balance: 20
             actions-if-not-met:
@@ -188,9 +192,10 @@ icons:
   other-menu:
     name: '&c&nOpen another menu'
     material: 'ENDER_CHEST'
-    position:
-      x: 6
-      y: 1
+    positions:
+      1:
+        x: 6
+        y: 1
     lore:
       - 'Opens another menu.'
       - '&cBy default, this menu does not exist,'
@@ -201,9 +206,10 @@ icons:
   change-server:
     name: '&2&nTransfer to another Bungee server'
     material: 'ENDER_PEARL'
-    position:
-      x: 7
-      y: 1
+    positions:
+      1:
+        x: 7
+        y: 1
     lore:
       - 'If this server is running BungeeCord, this'
       - 'will send you to the server ''&blobby&7'','
@@ -214,9 +220,10 @@ icons:
   close-menu:
     name: '&4&nClose menu'
     material: 'SPRUCE_DOOR'
-    position:
-      x: 4
-      y: 2
+    positions:
+      1:
+        x: 4
+        y: 2
     actions:
       all:
         close-menu: true

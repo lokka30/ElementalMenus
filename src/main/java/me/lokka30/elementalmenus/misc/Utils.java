@@ -55,4 +55,20 @@ public class Utils {
             Utils.LOGGER.info("&8(&bDEBUG &8- &f" + category + "&8): &7" + msg);
         }
     }
+
+    public static Object warnAndReturn(final Object object, final String warning) {
+        Utils.LOGGER.warning(warning);
+        return object;
+    }
+
+    /**
+     * Return 'def' object if 'object' is null, otherwise return 'object'
+     *
+     * @param object object to check if null
+     * @param def    def object to rely on
+     * @return def if 'object' is null, otherwise return 'object'
+     */
+    public static Object getDefaultIfNull(final Object object, final Object def) {
+        return object == null ? def : object;
+    }
 }
