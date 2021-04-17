@@ -8,7 +8,7 @@ import me.lokka30.microlib.MicroLogger;
  *
  * @author lokka30
  * @contributors none
- * @since v0.0
+ * @since v0.0.0
  */
 public class Utils {
 
@@ -26,7 +26,7 @@ public class Utils {
      * @return current value, at lowest 'min' and at most 'max'.
      * @author lokka30
      * @contributors none
-     * @since v0.0
+     * @since v0.0.0
      */
     public static int bound(int min, int current, int max) {
         if (current > max) {
@@ -48,7 +48,7 @@ public class Utils {
      *                 menu'.
      * @author lokka30
      * @contributors none
-     * @since v0.0
+     * @since v0.0.0
      */
     public static void sendDebugLog(final DebugCategory category, final String msg) {
         if (ElementalMenus.getInstance().advancedSettingsCfg.getConfig().getStringList("debug.categories").contains(category.toString())) {
@@ -67,6 +67,9 @@ public class Utils {
      * @param object object to check if null
      * @param def    def object to rely on
      * @return def if 'object' is null, otherwise return 'object'
+     * @author lokka30
+     * @contributors none
+     * @since v0.0.0
      */
     public static Object getDefaultIfNull(final Object object, final Object def) {
         return object == null ? def : object;

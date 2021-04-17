@@ -26,7 +26,7 @@ import java.util.*;
  *
  * @author lokka30
  * @contributors none
- * @since v0.0
+ * @since v0.0.0
  */
 public class Menu {
     public final String name;

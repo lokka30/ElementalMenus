@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
  *
  * @author lokka30
  * @contributors none
- * @since v0.0
+ * @since v0.0.0
  */
 public class ChangeBalanceAction implements Action {
 

@@ -6,12 +6,16 @@ import me.lokka30.elementalmenus.menus.Menu;
 import me.lokka30.elementalmenus.misc.Utils;
 import me.lokka30.microlib.QuickTimer;
 import me.lokka30.microlib.YamlConfigFile;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The main class of the plugin. Bukkit calls onEnable
@@ -20,7 +24,7 @@ import java.util.HashSet;
  *
  * @author lokka30
  * @contributors none
- * @since v0.0
+ * @since v0.0.0
  */
 public class ElementalMenus extends JavaPlugin {
 
@@ -64,12 +68,16 @@ public class ElementalMenus extends JavaPlugin {
         QuickTimer timer = new QuickTimer();
         Utils.LOGGER.info("&fInitiating start-up procedure...");
 
+        /*
+        Do not move these two please.
+         */
         instance = this;
-
         fileManager.loadFiles();
+
+        compatibilityManager.checkCompatibility();
+        setupEconomy();
         menuManager.loadMenus();
         commandManager.registerCommand("elementalmenus", new ElementalMenusCommand(this));
-        compatibilityManager.checkCompatibility();
         updateManager.checkForUpdates();
 
         Utils.LOGGER.info("&fStart-up complete &8(&7took &b" + timer.getTimer() + "ms&8)");
@@ -83,8 +91,15 @@ public class ElementalMenus extends JavaPlugin {
         QuickTimer timer = new QuickTimer();
         Utils.LOGGER.info("&fInitiating shut-down procedure...");
 
-        menuManager.menusCurrentlyOpen.keySet().forEach(uuid -> menuManager.getMenu(menuManager.menusCurrentlyOpen.get(uuid))
-                .processEvent(Menu.MenuCloseEventType.CLOSE_DISCONNECT, Bukkit.getPlayer(uuid)));
+        Set<UUID> set = menuManager.menusCurrentlyOpen.keySet(); // don't want to modify the map whilst iterating through it.
+        set.forEach(uuid -> {
+            if (Bukkit.getPlayer(uuid) == null) {
+                menuManager.menusCurrentlyOpen.remove(uuid);
+            } else {
+                //noinspection ConstantConditions
+                menuManager.getMenu(menuManager.menusCurrentlyOpen.get(uuid)).processEvent(Menu.MenuCloseEventType.CLOSE_DISCONNECT, Bukkit.getPlayer(uuid));
+            }
+        });
 
         Utils.LOGGER.info("&fShut-down complete &8(&7took &b" + timer.getTimer() + "ms&8)");
     }
@@ -98,5 +113,21 @@ public class ElementalMenus extends JavaPlugin {
 
     public static ElementalMenus getInstance() {
         return instance;
+    }
+
+    /*
+    Economy
+     */
+    Economy economy;
+
+    private void setupEconomy() {
+        if (Bukkit.getPluginManager().getPlugin("Vault") == null) return;
+
+        RegisteredServiceProvider<Economy> rsp = Bukkit.getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            Utils.LOGGER.error("Unable to connect to Vault economy provider!");
+        } else {
+            economy = rsp.getProvider();
+        }
     }
 }
