@@ -1,5 +1,8 @@
 package me.lokka30.elementalmenus.menus.actions;
 
+import me.lokka30.elementalmenus.ElementalMenus;
+import me.lokka30.elementalmenus.misc.Utils;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 
 /**
@@ -21,15 +24,25 @@ public class ChangeBalanceAction implements Action {
 
     @Override
     public void parse(Player player) {
+        Economy economy = ElementalMenus.getInstance().economy;
+
+        if (amount <= 0) {
+            Utils.LOGGER.error("Invalid amount specified for a balance change action with amount '&b" + amount + "&7' and transaction type '&b" + transaction + "&7'. Amount must be greater than 0.");
+            return;
+        }
+
         switch (transaction) {
             case DEPOSIT_BALANCE:
-                //TODO
+                economy.depositPlayer(player, amount);
                 break;
             case WITHDRAW_BALANCE:
-                //TODO
+                if (economy.has(player, amount)) {
+                    economy.withdrawPlayer(player, amount);
+                }
                 break;
             case SET_BALANCE:
-                //TODO
+                economy.withdrawPlayer(player, economy.getBalance(player));
+                economy.depositPlayer(player, amount);
                 break;
             default:
                 throw new IllegalStateException("Unexpected Transaction " + transaction);

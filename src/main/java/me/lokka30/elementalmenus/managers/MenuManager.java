@@ -30,6 +30,7 @@ public class MenuManager implements Listener {
 
     public void loadMenus() {
         main.getServer().getPluginManager().registerEvents(this, main);
+        main.menus.forEach(Menu::load);
     }
 
     @Nullable

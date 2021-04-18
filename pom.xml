@@ -19,13 +19,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <scm>
-        <connection>scm:svn:http://127.0.0.1/dummy</connection>
-        <developerConnection>scm:svn:https://127.0.0.1/dummy</developerConnection>
-        <tag>HEAD</tag>
-        <url>http://127.0.0.1/dummy</url>
-    </scm>
-
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
@@ -62,29 +55,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>buildnumber</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <format>{0,number}</format>
-                    <items>
-                        <item>buildNumber</item>
-                    </items>
-                    <doCheck>false</doCheck>
-                    <doUpdate>false</doUpdate>
-                    <revisionOnScmFailure>unknownbuild</revisionOnScmFailure>
-                </configuration>
-            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -92,7 +62,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>${project.name} v${project.version} b${buildNumber}</finalName>
+        <finalName>${project.name} v${project.version}</finalName>
     </build>
 
     <repositories>

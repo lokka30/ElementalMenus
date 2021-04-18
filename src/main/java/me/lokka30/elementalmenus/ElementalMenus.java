@@ -8,8 +8,10 @@ import me.lokka30.microlib.QuickTimer;
 import me.lokka30.microlib.YamlConfigFile;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.io.File;
 import java.util.Collections;
@@ -26,7 +28,7 @@ import java.util.UUID;
  * @contributors none
  * @since v0.0.0
  */
-public class ElementalMenus extends JavaPlugin {
+public class ElementalMenus extends JavaPlugin implements PluginMessageListener {
 
     /**
      * Credits.
@@ -118,7 +120,7 @@ public class ElementalMenus extends JavaPlugin {
     /*
     Economy
      */
-    Economy economy;
+    public Economy economy;
 
     private void setupEconomy() {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) return;
@@ -129,5 +131,9 @@ public class ElementalMenus extends JavaPlugin {
         } else {
             economy = rsp.getProvider();
         }
+    }
+
+    @Override
+    public void onPluginMessageReceived(String s, Player player, byte[] bytes) {
     }
 }

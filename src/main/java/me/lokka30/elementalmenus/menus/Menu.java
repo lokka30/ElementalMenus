@@ -40,7 +40,7 @@ public class Menu {
         this.config = config;
     }
 
-    protected void load() {
+    public void load() {
         inventory = Bukkit.createInventory(null,
                 Utils.bound(1, config.getConfig().getInt("menu.rows", 3), 6) * 9,
                 MessageUtils.colorizeAll(config.getConfig().getString("menu.title", "Menu")));
@@ -67,6 +67,9 @@ public class Menu {
         switch (menuCloseEventType) {
             case CLOSE_DISCONNECT:
                 //TODO process actions for CLOSE_DISCONNECT
+                break;
+            case CLOSE_OPENING_OTHER_MENU:
+                //TODO process action for CLOSE_OPENING_OTHER_MENU
                 break;
             case CLOSE_INVENTORY:
                 //TODO process actions for CLOSE_INVENTORY
@@ -270,6 +273,14 @@ public class Menu {
          * force-closes the inventory.
          */
         CLOSE_INVENTORY,
+
+        /**
+         * When the player closes the
+         * menu since the current menu
+         * is directing them to another
+         * menu.
+         */
+        CLOSE_OPENING_OTHER_MENU,
 
         /**
          * When the user disconnects
