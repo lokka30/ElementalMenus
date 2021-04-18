@@ -1,5 +1,11 @@
 # Contribution Guidelines
 
+## IDE
+
+* **IntelliJ IDEA** is strongly recommended - it's free (and much better than Eclipse)!
+* **Do not allow your IDE to automatically re-arrange code.** We have purposely grouped variables and methods together,
+  and we would rather an IDE's reformatter not mess with it.
+
 ## Language
 
 * All contributions **must** be written in **English**. Please use the 'US' version - for instance, 'color' should be
@@ -23,4 +29,4 @@ It is important that other developers clearly understand how your code works.
 
 ***
 
-`CONTRIBUTING.md` `v1`
+`CONTRIBUTING.md` `v2`
