@@ -31,16 +31,14 @@ import java.util.*;
 public class Menu {
     public final String name;
     public final YamlConfigFile config;
+    public final HashSet<Icon> icons = new HashSet<>();
+    public Icon fillerIcon;
+    private Inventory inventory;
 
     public Menu(final String name, final YamlConfigFile config) {
         this.name = name;
         this.config = config;
     }
-
-    public Icon fillerIcon;
-    public final HashSet<Icon> icons = new HashSet<>();
-
-    private Inventory inventory;
 
     protected void load() {
         inventory = Bukkit.createInventory(null,
@@ -64,25 +62,6 @@ public class Menu {
         //TODO Process actions and conditions for interaction type and slot
     }
 
-    public enum MenuCloseEventType {
-        /**
-         * When the player closes the
-         * inventory by normal means,
-         * or if a plugin or the server
-         * force-closes the inventory.
-         */
-        CLOSE_INVENTORY,
-
-        /**
-         * When the user disconnects
-         * whilst the menu is open.
-         * Limited actions are applicable
-         * to players concerning this
-         * menu event.
-         */
-        CLOSE_DISCONNECT
-    }
-
     public void processEvent(final MenuCloseEventType menuCloseEventType, final Player player) {
         ElementalMenus.getInstance().menuManager.menusCurrentlyOpen.remove(player.getUniqueId());
         switch (menuCloseEventType) {
@@ -102,24 +81,14 @@ public class Menu {
     }
 
     private void loadIcons() {
+        /*
+        Filler icon.
+        Note: filler icon does not initially have any slots, its slots are populated in Menu#setIcons.
+         */
+        fillerIcon = new Icon(new HashSet<>(), getItemStackOfIcon("filler-icon", "filler-icon"), getActionMapOfIcon("filler-icon", "filler-icon"));
+
         for (String iconName : (Set<String>) Utils.getDefaultIfNull(config.getConfig().getConfigurationSection("icons").getKeys(false), new ArrayList<>())) {
             final String configPath = "icons." + iconName + ".";
-
-            /*
-            Material
-             */
-            Material material = Material.AIR;
-            if (config.getConfig().contains(configPath + "material")) {
-                try {
-                    material = Material.valueOf(config.getConfig().getString(configPath + "material"));
-                } catch (IllegalArgumentException e) {
-                    Utils.LOGGER.error("Icon '&b" + iconName + "&7' in menu '&b" + name + "&7' has an invalid material name specified! Using '&bAIR&7' until you fix it.");
-                }
-            } else {
-                Utils.LOGGER.error("Material for an item is not defined for icon &b'" + iconName + "'&7 in menu '&b" + name + "&7'! Using '&bAIR&7' until you fix it.");
-            }
-            ItemStack itemStack = new ItemStack(material);
-            ItemMeta itemMeta = itemStack.getItemMeta();
 
             /*
             Slots
@@ -132,126 +101,18 @@ public class Menu {
                             + Utils.bound(0, 9 * config.getConfig().getInt(configPath + "position.y", 0), 3), // y value
                     inventory.getSize() - 1); // max slot limit
 
-            /*
-            Amount
-             */
-            itemStack.setAmount(config.getConfig().getInt(configPath + "amount", 1));
-
-            /*
-            Enchantments
-             */
-            if (config.getConfig().contains(configPath + "enchantments")) {
-                boolean allowUnsafe = config.getConfig().getBoolean(configPath + "enchantments.allow-unsafe", false);
-                Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
-
-                //TODO Get and apply enchantments to item
-
-                if (!enchantmentMap.isEmpty()) {
-                    if (allowUnsafe) {
-                        itemStack.addUnsafeEnchantments(enchantmentMap);
-                    } else {
-                        itemStack.addEnchantments(enchantmentMap);
-                    }
-                }
-            }
-
-            if (itemMeta != null) {
-                /*
-                Display Name
-                 */
-                itemMeta.setDisplayName(config.getConfig().getString(configPath + "name", null));
-
-                /*
-                Lore
-                 */
-                itemMeta.setLore(config.getConfig().getStringList(configPath + "lore"));
-
-                /*
-                Remove Durability
-                 */
-                if (itemMeta instanceof Damageable) {
-                    ((Damageable) itemMeta).setDamage(
-                            config.getConfig().getInt(configPath + "remove-durability", 0)
-                    );
-                }
-
-                /*
-                Color
-                 */
-                if (itemMeta instanceof LeatherArmorMeta) {
-                    if (config.getConfig().contains(configPath + "color")) {
-                        ((LeatherArmorMeta) itemMeta).setColor(Color.fromRGB(
-                                Utils.bound(0, config.getConfig().getInt(configPath + "color.r", 0), 255),
-                                Utils.bound(0, config.getConfig().getInt(configPath + "color.g", 0), 255),
-                                Utils.bound(0, config.getConfig().getInt(configPath + "color.b", 0), 255)
-                        ));
-                    }
-                }
-
-                /*
-                Skull Owner
-                 */
-                if (itemMeta instanceof SkullMeta) {
-                    if (config.getConfig().contains(configPath + "skull-owner")) {
-                        //noinspection deprecation, ConstantConditions
-                        ((SkullMeta) itemMeta).setOwningPlayer(Bukkit.getOfflinePlayer(
-                                config.getConfig().getString(configPath + "skull-owner", "lokka30")
-                        ));
-                    }
-                }
-
-                /*
-                Banner Patterns
-                 */
-                if (itemMeta instanceof BannerMeta) {
-                    List<Pattern> patterns = new ArrayList<>();
-
-                    for (String configuredPattern : config.getConfig().getStringList(configPath + "banner-patterns")) {
-                        PatternType patternType;
-                        DyeColor dyeColor;
-
-                        String[] split = configuredPattern.split(": ");
-
-                        if (split.length != 2) {
-                            Utils.LOGGER.error("Invalid banner pattern '&b" + configuredPattern + "&7' for icon '&b" + iconName + "&7' in menu '&b" + name + "&7'!");
-                            continue;
-                        }
-
-                        try {
-                            patternType = PatternType.valueOf(split[0]);
-                        } catch (IllegalArgumentException ex) {
-                            Utils.LOGGER.error("Invalid banner pattern type '&b" + split[0] + "&7' for icon '&b" + iconName + "&7' in menu '&b" + name + "&7'!");
-                            continue;
-                        }
-
-                        try {
-                            dyeColor = DyeColor.valueOf(split[1]);
-                        } catch (IllegalArgumentException ex) {
-                            Utils.LOGGER.error("Invalid banner dye color '&b" + split[1] + "&7' for icon '&b" + iconName + "&7' in menu '&b" + name + "&7'!");
-                            continue;
-                        }
-
-                        patterns.add(new Pattern(dyeColor, patternType));
-                    }
-
-                    ((BannerMeta) itemMeta).setPatterns(patterns);
-                }
-            }
-
-            /*
-            Load actions
-             */
-            //TODO
-            HashMap<IconInteractionType, HashSet<Action>> actionMap = new HashMap<>();
-
-            if (itemStack.hasItemMeta()) itemStack.setItemMeta(itemMeta);
-            icons.add(new Icon(slots, itemStack, actionMap));
+            icons.add(new Icon(slots, getItemStackOfIcon(iconName, configPath), getActionMapOfIcon(iconName, configPath)));
         }
     }
 
     private void setIcons() {
         for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, getIconAtSlot(i).getItemStack());
+            final Icon icon = getIconAtSlot(i);
+
+            inventory.setItem(i, icon.getItemStack());
+
+            // Populate slots of filler icon.
+            if (icon == fillerIcon) fillerIcon.getSlots().add(i);
         }
     }
 
@@ -261,6 +122,162 @@ public class Menu {
                 if (slot == definedSlot) return icon;
             }
         }
+
         return fillerIcon;
+    }
+
+    private ItemStack getItemStackOfIcon(String iconName, String configPath) {
+        /*
+            Material
+             */
+        Material material = Material.AIR;
+        if (config.getConfig().contains(configPath + "material")) {
+            try {
+                material = Material.valueOf(config.getConfig().getString(configPath + "material"));
+            } catch (IllegalArgumentException e) {
+                Utils.LOGGER.error("Icon '&b" + iconName + "&7' in menu '&b" + name + "&7' has an invalid material name specified! Using '&bAIR&7' until you fix it.");
+            }
+        } else {
+            Utils.LOGGER.error("Material for an item is not defined for icon &b'" + iconName + "'&7 in menu '&b" + name + "&7'! Using '&bAIR&7' until you fix it.");
+        }
+        ItemStack itemStack = new ItemStack(material);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+
+            /*
+            Amount
+             */
+        itemStack.setAmount(config.getConfig().getInt(configPath + "amount", 1));
+
+            /*
+            Enchantments
+             */
+        if (config.getConfig().contains(configPath + "enchantments")) {
+            boolean allowUnsafe = config.getConfig().getBoolean(configPath + "enchantments.allow-unsafe", false);
+            Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
+
+            //TODO Get and apply enchantments to item
+
+            if (!enchantmentMap.isEmpty()) {
+                if (allowUnsafe) {
+                    itemStack.addUnsafeEnchantments(enchantmentMap);
+                } else {
+                    itemStack.addEnchantments(enchantmentMap);
+                }
+            }
+        }
+
+        if (itemMeta != null) {
+                /*
+                Display Name
+                 */
+            itemMeta.setDisplayName(config.getConfig().getString(configPath + "name", null));
+
+                /*
+                Lore
+                 */
+            itemMeta.setLore(config.getConfig().getStringList(configPath + "lore"));
+
+                /*
+                Remove Durability
+                 */
+            if (itemMeta instanceof Damageable) {
+                ((Damageable) itemMeta).setDamage(
+                        config.getConfig().getInt(configPath + "remove-durability", 0)
+                );
+            }
+
+                /*
+                Color
+                 */
+            if (itemMeta instanceof LeatherArmorMeta) {
+                if (config.getConfig().contains(configPath + "color")) {
+                    ((LeatherArmorMeta) itemMeta).setColor(Color.fromRGB(
+                            Utils.bound(0, config.getConfig().getInt(configPath + "color.r", 0), 255),
+                            Utils.bound(0, config.getConfig().getInt(configPath + "color.g", 0), 255),
+                            Utils.bound(0, config.getConfig().getInt(configPath + "color.b", 0), 255)
+                    ));
+                }
+            }
+
+                /*
+                Skull Owner
+                 */
+            if (itemMeta instanceof SkullMeta) {
+                if (config.getConfig().contains(configPath + "skull-owner")) {
+                    //noinspection deprecation, ConstantConditions
+                    ((SkullMeta) itemMeta).setOwningPlayer(Bukkit.getOfflinePlayer(
+                            config.getConfig().getString(configPath + "skull-owner", "lokka30")
+                    ));
+                }
+            }
+
+                /*
+                Banner Patterns
+                 */
+            if (itemMeta instanceof BannerMeta) {
+                List<Pattern> patterns = new ArrayList<>();
+
+                for (String configuredPattern : config.getConfig().getStringList(configPath + "banner-patterns")) {
+                    PatternType patternType;
+                    DyeColor dyeColor;
+
+                    String[] split = configuredPattern.split(": ");
+
+                    if (split.length != 2) {
+                        Utils.LOGGER.error("Invalid banner pattern '&b" + configuredPattern + "&7' for icon '&b" + iconName + "&7' in menu '&b" + name + "&7'!");
+                        continue;
+                    }
+
+                    try {
+                        patternType = PatternType.valueOf(split[0]);
+                    } catch (IllegalArgumentException ex) {
+                        Utils.LOGGER.error("Invalid banner pattern type '&b" + split[0] + "&7' for icon '&b" + iconName + "&7' in menu '&b" + name + "&7'!");
+                        continue;
+                    }
+
+                    try {
+                        dyeColor = DyeColor.valueOf(split[1]);
+                    } catch (IllegalArgumentException ex) {
+                        Utils.LOGGER.error("Invalid banner dye color '&b" + split[1] + "&7' for icon '&b" + iconName + "&7' in menu '&b" + name + "&7'!");
+                        continue;
+                    }
+
+                    patterns.add(new Pattern(dyeColor, patternType));
+                }
+
+                ((BannerMeta) itemMeta).setPatterns(patterns);
+            }
+        }
+
+        if (itemStack.hasItemMeta()) itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
+    }
+
+    private HashMap<IconInteractionType, HashSet<Action>> getActionMapOfIcon(String iconName, String configPath) {
+        HashMap<IconInteractionType, HashSet<Action>> actionMap = new HashMap<>();
+
+        //TODO
+
+        return actionMap;
+    }
+
+    public enum MenuCloseEventType {
+        /**
+         * When the player closes the
+         * inventory by normal means,
+         * or if a plugin or the server
+         * force-closes the inventory.
+         */
+        CLOSE_INVENTORY,
+
+        /**
+         * When the user disconnects
+         * whilst the menu is open.
+         * Limited actions are applicable
+         * to players concerning this
+         * menu event.
+         */
+        CLOSE_DISCONNECT
     }
 }
