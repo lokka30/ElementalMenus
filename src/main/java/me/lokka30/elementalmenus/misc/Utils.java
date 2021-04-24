@@ -7,7 +7,6 @@ import me.lokka30.microlib.MicroLogger;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class Utils {
@@ -25,7 +24,6 @@ public class Utils {
      * @param max     max value
      * @return current value, at lowest 'min' and at most 'max'.
      * @author lokka30
-     * @contributors none
      * @since v0.0.0
      */
     public static int bound(int min, int current, int max) {
@@ -47,7 +45,6 @@ public class Utils {
      *                 debug category, e.g., 'Notch opened a
      *                 menu'.
      * @author lokka30
-     * @contributors none
      * @since v0.0.0
      */
     public static void sendDebugLog(final DebugCategory category, final String msg) {
@@ -68,7 +65,6 @@ public class Utils {
      * @param def    def object to rely on
      * @return def if 'object' is null, otherwise return 'object'
      * @author lokka30
-     * @contributors none
      * @since v0.0.0
      */
     public static Object getDefaultIfNull(final Object object, final Object def) {

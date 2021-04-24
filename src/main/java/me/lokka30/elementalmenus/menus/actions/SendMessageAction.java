@@ -21,7 +21,6 @@ import java.util.List;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class SendMessageAction implements Action {
@@ -145,6 +144,12 @@ public class SendMessageAction implements Action {
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public enum MessageType {
         STANDARD,
         JSON,
@@ -153,9 +158,21 @@ public class SendMessageAction implements Action {
         TITLE
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     interface ExtraInfo {
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     static class ActionBarExtraInfo implements ExtraInfo {
         int duration;
 
@@ -163,11 +180,23 @@ public class SendMessageAction implements Action {
             this.duration = duration;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public int getDuration() {
             return duration;
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     static class BossBarExtraInfo implements ExtraInfo {
         int duration;
         BarColor barColor;
@@ -181,23 +210,53 @@ public class SendMessageAction implements Action {
             this.barFlags = barFlags;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public int getDuration() {
             return duration;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public BarColor getBarColor() {
             return barColor;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public BarStyle getBarStyle() {
             return barStyle;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public BarFlag[] getBarFlags() {
             return barFlags;
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     static class TitleExtraInfo implements ExtraInfo {
         int duration;
         int fade;
@@ -207,10 +266,22 @@ public class SendMessageAction implements Action {
             this.fade = fade;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public int getDuration() {
             return duration;
         }
 
+        /**
+         * TODO Describe...
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         public int getFade() {
             return fade;
         }

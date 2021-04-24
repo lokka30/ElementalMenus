@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class ChangeBalanceAction implements Action {
@@ -49,6 +48,12 @@ public class ChangeBalanceAction implements Action {
         }
     }
 
+    /**
+     * Type of economy transaction to take place
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public enum Transaction {
         DEPOSIT_BALANCE,
         WITHDRAW_BALANCE,

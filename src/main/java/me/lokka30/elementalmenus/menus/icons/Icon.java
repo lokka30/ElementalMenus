@@ -10,7 +10,6 @@ import java.util.HashSet;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class Icon {
@@ -25,14 +24,32 @@ public class Icon {
         this.actionMap = actionMap;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public ItemStack getItemStack() {
         return itemStack;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public HashSet<Integer> getSlots() {
         return slots;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public HashMap<IconInteractionType, HashSet<Action>> getActionMap() {
         return actionMap;
     }

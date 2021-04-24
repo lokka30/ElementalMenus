@@ -9,7 +9,6 @@ import org.bukkit.scheduler.BukkitRunnable;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class OpenOtherMenuAction implements Action {

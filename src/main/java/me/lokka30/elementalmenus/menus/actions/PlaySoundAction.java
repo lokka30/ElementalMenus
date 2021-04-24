@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class PlaySoundAction implements Action {

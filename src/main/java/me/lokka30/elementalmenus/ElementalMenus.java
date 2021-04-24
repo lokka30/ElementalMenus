@@ -31,12 +31,16 @@ import java.util.UUID;
 public class ElementalMenus extends JavaPlugin implements PluginMessageListener {
 
     /**
-     * Credits.
+     * Credits!
      * <p>
      * Developers:   Those who regularly develop the resource.
      * Don't touch this.
+     * <p>
      * Contributors: Those who have contributed code to the
      * resource.
+     * <p>
+     * Feel free to add yourself to the contributors list if
+     * you have changed code in the plugin.
      */
     public final HashSet<String> developers = new HashSet<>(Collections.singletonList("lokka30"));
     public final HashSet<String> contributors = new HashSet<>();
@@ -64,6 +68,9 @@ public class ElementalMenus extends JavaPlugin implements PluginMessageListener 
 
     /**
      * This method is called when Bukkit enables the plugin.
+     *
+     * @author lokka30
+     * @since v0.0.0
      */
     @Override
     public void onEnable() {
@@ -87,6 +94,9 @@ public class ElementalMenus extends JavaPlugin implements PluginMessageListener 
 
     /**
      * This method is called when Bukkit disables the plugin.
+     *
+     * @author lokka30
+     * @since v0.0.0
      */
     @Override
     public void onDisable() {
@@ -122,6 +132,12 @@ public class ElementalMenus extends JavaPlugin implements PluginMessageListener 
      */
     public Economy economy;
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     private void setupEconomy() {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) return;
 
@@ -133,6 +149,9 @@ public class ElementalMenus extends JavaPlugin implements PluginMessageListener 
         }
     }
 
+    /*
+    Leave as empty.
+     */
     @Override
     public void onPluginMessageReceived(String s, Player player, byte[] bytes) {
     }

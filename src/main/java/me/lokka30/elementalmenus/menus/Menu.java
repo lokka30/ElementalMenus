@@ -25,7 +25,6 @@ import java.util.*;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class Menu {
@@ -33,13 +32,19 @@ public class Menu {
     public final YamlConfigFile config;
     public final HashSet<Icon> icons = new HashSet<>();
     public Icon fillerIcon;
-    private Inventory inventory;
+    public Inventory inventory;
 
     public Menu(final String name, final YamlConfigFile config) {
         this.name = name;
         this.config = config;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public void load() {
         inventory = Bukkit.createInventory(null,
                 Utils.bound(1, config.getConfig().getInt("menu.rows", 3), 6) * 9,
@@ -50,6 +55,13 @@ public class Menu {
         setIcons();
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @param player TODO Describe...
+     * @author lokka30
+     * @since v0.0.0
+     */
     public void open(final Player player) {
         ElementalMenus.getInstance().menuManager.menusCurrentlyOpen.put(player.getUniqueId(), name);
 
@@ -58,6 +70,12 @@ public class Menu {
         //TODO open actions
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public void processInteraction(final Player player, final int slot, final IconInteractionType type) {
         //TODO Process actions and conditions for interaction type and slot
     }
@@ -79,10 +97,22 @@ public class Menu {
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public boolean isOpen(Player player) {
         return ElementalMenus.getInstance().menuManager.menusCurrentlyOpen.getOrDefault(player.getUniqueId(), "impossible.menu.name ;)").equals(name);
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     private void loadIcons() {
         /*
         Filler icon.
@@ -108,6 +138,12 @@ public class Menu {
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     private void setIcons() {
         for (int i = 0; i < inventory.getSize(); i++) {
             final Icon icon = getIconAtSlot(i);
@@ -119,6 +155,12 @@ public class Menu {
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public Icon getIconAtSlot(int slot) {
         for (Icon icon : icons) {
             for (int definedSlot : icon.getSlots()) {
@@ -129,6 +171,12 @@ public class Menu {
         return fillerIcon;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     private ItemStack getItemStackOfIcon(String iconName, String configPath) {
         /*
             Material
@@ -257,6 +305,12 @@ public class Menu {
         return itemStack;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     private HashMap<IconInteractionType, HashSet<Action>> getActionMapOfIcon(String iconName, String configPath) {
         HashMap<IconInteractionType, HashSet<Action>> actionMap = new HashMap<>();
 
@@ -265,6 +319,12 @@ public class Menu {
         return actionMap;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public enum MenuCloseEventType {
         /**
          * When the player closes the

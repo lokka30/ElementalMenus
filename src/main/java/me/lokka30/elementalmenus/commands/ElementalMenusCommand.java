@@ -1,5 +1,7 @@
 package me.lokka30.elementalmenus.commands;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import me.lokka30.elementalmenus.ElementalMenus;
 import me.lokka30.elementalmenus.commands.subcommands.AboutSubcommand;
 import me.lokka30.elementalmenus.commands.subcommands.BackupSubcommand;
@@ -18,29 +20,71 @@ import java.util.Locale;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class ElementalMenusCommand implements TabExecutor {
 
     private final ElementalMenus main;
 
-    public ElementalMenusCommand(final ElementalMenus main) {
+    public ElementalMenusCommand(@NotNull final ElementalMenus main) {
         this.main = main;
     }
 
+    /**
+     * This interface is used to associate all
+     * 'xyzSubcommand' classes together, using
+     * the same methods as each other.
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     @SuppressWarnings({"unused", "UnusedReturnValue"}) // IntelliJ bugs, these need to be suppressed.
     public interface Subcommand {
-        void parseCommand(ElementalMenus main, CommandSender sender, String label, String[] args);
 
-        List<String> parseTabCompletions(ElementalMenus main, CommandSender sender, String label, String[] args);
+        /**
+         * Run the subcommand.
+         *
+         * @param main   a link back to the main class
+         * @param sender who ran the command
+         * @param label  alias used to run the command
+         * @param args   arguments specified, including the base command
+         * @author lokka30
+         * @since v0.0.0
+         */
+        void parseCommand(@NotNull ElementalMenus main, @NotNull CommandSender sender, @NotNull String label, @Nullable String[] args);
+
+        /**
+         * Retrieve a list of tab completion suggestions for the subcommand.
+         *
+         * @param main   a link back to the main class
+         * @param sender who ran the command
+         * @param label  alias used to run the command
+         * @param args   arguments specified, including the base command
+         * @return a list of suggestions, can be empty but non-null
+         * @author lokka30
+         * @since v0.0.0
+         */
+        @NotNull
+        List<String> parseTabCompletions(@NotNull ElementalMenus main, @NotNull CommandSender sender, @NotNull String label, @Nullable String[] args);
     }
 
-    ReloadSubcommand reloadSubcommand = new ReloadSubcommand();
-    BackupSubcommand backupSubcommand = new BackupSubcommand();
-    CompatibilitySubcommand compatibilitySubcommand = new CompatibilitySubcommand();
-    AboutSubcommand aboutSubcommand = new AboutSubcommand();
+    final ReloadSubcommand reloadSubcommand = new ReloadSubcommand();
+    final BackupSubcommand backupSubcommand = new BackupSubcommand();
+    final CompatibilitySubcommand compatibilitySubcommand = new CompatibilitySubcommand();
+    final AboutSubcommand aboutSubcommand = new AboutSubcommand();
 
+    /**
+     * Run the code concerning the operations of the entire command.
+     * Forwards subcommands to their own separate classes.
+     *
+     * @param sender who ran the command
+     * @param cmd    the command that was ran
+     * @param label  alias used to run the command
+     * @param args   arguments specified
+     * @return if the command was able to run
+     * @author lokka30
+     * @since v0.0.0
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
@@ -67,6 +111,18 @@ public class ElementalMenusCommand implements TabExecutor {
         return true;
     }
 
+    /**
+     * Run the code concerning the tab completions of the entire command.
+     * Forwards subcommands to their own separate classes.
+     *
+     * @param sender who ran the command
+     * @param cmd    the command that was ran
+     * @param label  alias used to run the command
+     * @param args   arguments specified
+     * @return a list of tab completion suggestions for the user
+     * @author lokka30
+     * @since v0.0.0
+     */
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
@@ -93,7 +149,15 @@ public class ElementalMenusCommand implements TabExecutor {
         return new ArrayList<>();
     }
 
-    void parseUsageList(CommandSender sender, String label) {
+    /**
+     * TODO Describe...
+     *
+     * @param sender who ran the command
+     * @param label  alias used to run the command
+     * @author lokka30
+     * @since v0.0.0
+     */
+    void parseUsageList(@NotNull CommandSender sender, @NotNull String label) {
         Arrays.asList(
                 "Available commands:",
                 "- /" + label + " reload",
@@ -103,7 +167,15 @@ public class ElementalMenusCommand implements TabExecutor {
         ).forEach(sender::sendMessage);
     }
 
-    void parseUsage(CommandSender sender, String label) {
+    /**
+     * TODO Describe...
+     *
+     * @param sender who ran the command
+     * @param label  alias used to run the command
+     * @author lokka30
+     * @since v0.0.0
+     */
+    void parseUsage(@NotNull CommandSender sender, @NotNull String label) {
         sender.sendMessage("Usage: /" + label + " <reload/backup/compatibility/about> ...");
     }
 }

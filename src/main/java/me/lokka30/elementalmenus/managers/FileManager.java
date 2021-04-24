@@ -12,20 +12,27 @@ import java.io.IOException;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class FileManager {
 
     private final ElementalMenus main;
 
-    public FileManager(final ElementalMenus main) { this.main = main; }
+    public FileManager(final ElementalMenus main) {
+        this.main = main;
+    }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public void loadFiles() {
         // Save and load 'settings.yml'
         try {
             main.settingsCfg.load();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             Utils.LOGGER.error("Unable to load &bsettings.yml&7! Stack trace:");
             ex.printStackTrace();
         }
@@ -101,7 +108,12 @@ public class FileManager {
         Utils.LOGGER.info("Loaded a total of &b" + main.menus.size() + "&7 menus.");
     }
 
-
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public void backupFiles() {
         //TODO
     }

@@ -12,21 +12,28 @@ import java.util.HashSet;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class CompatibilityManager {
 
     private final ElementalMenus main;
 
-    public CompatibilityManager(final ElementalMenus main) { this.main = main; }
+    public CompatibilityManager(final ElementalMenus main) {
+        this.main = main;
+    }
 
+    /**
+     * A list of incompatibilities that were found from the latest scan.
+     */
     private final HashSet<Incompatibility> incompatibilities = new HashSet<>();
 
     /**
      * Checks over things such as the server's version to notify
      * any administrators if the plugin may be incompatible with
      * their server configuration
+     *
+     * @author lokka30
+     * @since v0.0.0
      */
     public void checkCompatibility() {
         Utils.LOGGER.info("Checking compatibility...");
@@ -34,7 +41,7 @@ public class CompatibilityManager {
         checkServerVersion();
         checkServerSoftware();
 
-        if(incompatibilities.size() == 0) {
+        if (incompatibilities.size() == 0) {
             Utils.LOGGER.info("Compatibility checks completed, no possible incompatibilities found.");
         } else {
             Utils.LOGGER.warning("Compatibility checks completed, &b" + incompatibilities.size() + "&7 possible incompatibilities were found:");
@@ -42,7 +49,21 @@ public class CompatibilityManager {
         }
     }
 
+    /**
+     * Incompatibility object used to store information
+     * about an incompatibility that was detected
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public static class Incompatibility {
+
+        /**
+         * The type of incompatibility detected
+         *
+         * @author lokka30
+         * @since v0.0.0
+         */
         enum Type {
             SERVER_VERSION,
             SERVER_SOFTWARE
@@ -56,15 +77,49 @@ public class CompatibilityManager {
             this.reason = reason;
         }
 
-        public Type getType() { return type; }
+        /**
+         * Get the Type of incompatibility it is
+         *
+         * @return type
+         * @author lokka30
+         * @since v0.0.0
+         */
+        public Type getType() {
+            return type;
+        }
 
-        public String getReason() { return reason; }
+        /**
+         * Get the reason that the incompatibility was triggered
+         *
+         * @return sentence as to why the reason was triggered
+         * @author lokka30
+         * @since v0.0.0
+         */
+        public String getReason() {
+            return reason;
+        }
     }
 
+    /**
+     * Check if an incompatibility is not suppressed
+     * on the advanced settings file.
+     *
+     * @param incompatibilityType type of incompatibility to check
+     * @return if it is not suppressed by configuration
+     * @author lokka30
+     * @since v0.0.0
+     */
     public boolean isNotSuppressed(final Incompatibility.Type incompatibilityType) {
         return !main.advancedSettingsCfg.getConfig().getBoolean("compatibility-manager.suppressions." + incompatibilityType.toString());
     }
 
+    /**
+     * TODO Describe ...
+     *
+     * @param event PlayerJoinEvent
+     * @author lokka30
+     * @since v0.0.0
+     */
     public void parseJoin(final PlayerJoinEvent event) {
         //TODO print incompatibilities to admins.
         // incompatibilities.size() incompatibilities were found
@@ -78,6 +133,12 @@ public class CompatibilityManager {
         player.sendMessage("Please run '/menu compatibility' to view these possible incompatibilities.");
     }
 
+    /**
+     * TODO Describe ...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     private void checkServerVersion() {
         if (isNotSuppressed(Incompatibility.Type.SERVER_VERSION)) {
             if (!VersionUtils.isOneThirteen()) {
@@ -90,6 +151,9 @@ public class CompatibilityManager {
      * The server should be running a Spigot (or derivative)
      * as ElementalMenus utilises Spigot code, such as sending
      * action bar messages to players.
+     *
+     * @author lokka30
+     * @since v0.0.0
      */
     private void checkServerSoftware() {
         try {
@@ -101,6 +165,13 @@ public class CompatibilityManager {
         }
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @return incompatibilities detected
+     * @author lokka30
+     * @since v0.0.0
+     */
     public HashSet<Incompatibility> getIncompatibilities() {
         return incompatibilities;
     }

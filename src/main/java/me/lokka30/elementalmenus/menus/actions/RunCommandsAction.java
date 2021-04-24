@@ -10,7 +10,6 @@ import java.util.List;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class RunCommandsAction implements Action {

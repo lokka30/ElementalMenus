@@ -8,7 +8,6 @@ import java.util.HashSet;
  * TODO Describe...
  *
  * @author lokka30
- * @contributors none
  * @since v0.0.0
  */
 public class DetectableItem {
@@ -25,18 +24,42 @@ public class DetectableItem {
         this.lore = lore;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public Material getMaterial() {
         return material;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public int getAmount() {
         return amount;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public String getDisplayName() {
         return displayName;
     }
 
+    /**
+     * TODO Describe...
+     *
+     * @author lokka30
+     * @since v0.0.0
+     */
     public HashSet<String> getLore() {
         return lore;
     }
